@@ -12,8 +12,11 @@ jobs:
       pull-requests: write
     steps:
     - name: 'Auto-assign issue'
-      uses: pozil/auto-assign-issue@v1
+      # v1 ran on deprecated Node 16/20 and did not know numOfAssignee, so the run failed
+      uses: pozil/auto-assign-issue@v4.1.0
       with:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
           assignees: Chiraphinyo001
           numOfAssignee: 1
+          # do not fail the workflow if the user cannot be assigned (e.g. not a collaborator)
+          allowNoAssignees: true
