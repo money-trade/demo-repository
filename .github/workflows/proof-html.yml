@@ -1,11 +1,15 @@
 name: Proof HTML
 on:
   push:
+  pull_request:
   workflow_dispatch:
+permissions:
+  contents: read
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: anishathalye/proof-html@v1.1.0
+      # v2 also runs the W3C HTML validator (check_html) in addition to the link checks
+      - uses: anishathalye/proof-html@v2.2.5
         with:
           directory: ./
